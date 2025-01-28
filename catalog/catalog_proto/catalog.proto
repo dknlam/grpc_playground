@@ -1,0 +1,49 @@
+syntax = "proto3";
+package catalog;
+
+option go_package = "github.com/dknlam/grpc_playground/catalog/catalog_proto";
+
+service CatalogManager {
+    // APIs for single item
+    rpc GetItem (ItemRequest) returns (ItemResponse) {}
+    rpc SetItem (SetItemRequest) returns (ItemResponse) {}
+    rpc DeleteItem (ItemRequest) returns (ItemResponse) {}
+
+    // APIs for multiple items
+    rpc GetItems (ItemsRequest) returns (ItemsResponse) {}
+    rpc SetItems (SetItemsRequest) returns (ItemsResponse) {}
+    rpc DeleteItems (ItemsRequest) returns (ItemsResponse) {}
+
+    // APIs for multiple items using stream
+    rpc GetItemsAsStream (ItemsRequest) returns (stream ItemResponse) {}
+    rpc GetItemsAsStreamInteractive (stream ItemRequest) returns (stream ItemResponse) {}
+}
+
+message Item {
+    string name = 1;
+    string description = 2;
+}
+
+message ItemRequest {
+    string name = 1;
+}
+
+message SetItemRequest {
+    Item item = 1;
+}
+
+message ItemResponse {
+    Item item = 1;
+}
+
+message ItemsRequest {
+    repeated string names = 1;
+}
+
+message SetItemsRequest {
+    repeated Item items = 1;
+}
+
+message ItemsResponse {
+    repeated Item items = 1;
+}
