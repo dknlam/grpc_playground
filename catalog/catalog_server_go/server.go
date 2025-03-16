@@ -38,7 +38,7 @@ func (s *server) GetItem(ctx context.Context, in *pb.ItemRequest) (*pb.ItemRespo
 		return &pb.ItemResponse{Item: item}, nil
 	} else {
 		// Return an error
-		return nil, errors.New("item not found")
+		return nil, errors.New("item not found for name: " + in.Name)
 	}
 }
 
